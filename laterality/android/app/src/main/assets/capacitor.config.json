@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "laterality",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
