@@ -1,0 +1,7 @@
+{
+  "name": "laterality",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
