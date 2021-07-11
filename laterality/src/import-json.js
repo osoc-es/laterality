@@ -1,8 +1,8 @@
 const dataToImport = {
-  database: "testdb",
+  database: "laterdb",
   version: 1,
   encrypted: false,
-  mode: "partial",
+  mode: "full",
   tables: [
     {
       name: "avatar",

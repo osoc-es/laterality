@@ -21,8 +21,12 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { initdb } from './dataservice';
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  //initdb().catch(() => window.alert("ERROR INITIALIZING"));
+
+  return (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
@@ -35,6 +39,7 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+  );
+};
 
 export default App;

@@ -7,6 +7,7 @@ import jsonData from "./import-json";
 
 const { CapacitorSQLite } = Plugins;
 
+//const mSQLite = new SQLiteConnection(CapacitorSQLite);
 const mSQLite = new SQLiteConnection(CapacitorSQLite);
 let database: any;
 
@@ -23,7 +24,7 @@ const loadJSON = async () => {
 export const initdb = async () => {
   try {
     database = await mSQLite.createConnection(
-      "testdb",
+      "laterdb",
       false,
       "no-encryption",
       1
@@ -33,6 +34,7 @@ export const initdb = async () => {
     await loadJSON();
 
     return database;
+
   } catch (e) {
     window.alert(JSON.stringify(e, null, 2));
     return null;
@@ -86,7 +88,7 @@ export const updateUserById = async (userId: any, userData: any) => {
  *
  * @param userData
  */
-export const createContact = async (userData: any) => {
+export const createUser = async (userData: any) => {
   const { name, points} = userData;
   return await database.run(
     "INSERT INTO users (name,points) VALUES(?,?)",
