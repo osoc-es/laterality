@@ -22,9 +22,10 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { initdb } from './dataservice';
+import EditUser from './pages/EditUser';
 
 const App: React.FC = () => {
-  //initdb().catch(() => window.alert("ERROR INITIALIZING"));
+  initdb().catch(() => window.alert("ERROR INITIALIZING"));
 
   return (
   <IonApp>
@@ -32,6 +33,12 @@ const App: React.FC = () => {
       <IonRouterOutlet>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/edit-user/:id">
+          <EditUser />
+        </Route>
+        <Route exact path="/create-user">
+          <EditUser />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
