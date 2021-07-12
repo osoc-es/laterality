@@ -5,7 +5,7 @@ http://ionicframework.com/docs/theming/ */
 :root {
 
   --ion-font-family:  'Alata', normal !important;
-  
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

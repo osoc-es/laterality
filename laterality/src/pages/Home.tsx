@@ -2,6 +2,7 @@ import {
   IonButton,
   IonButtons,
   IonContent,
+  IonFooter,
   IonHeader,
   IonPage,
   IonTitle,
@@ -43,17 +44,25 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
+      
       <IonHeader>
         <IonToolbar>
           <IonTitle>LATUS</IonTitle>
-          <IonButtons slot="end">
-            <IonButton routerLink={"/create-user"}>AÑADIR USUARIO</IonButton>
-          </IonButtons>
         </IonToolbar>
       </IonHeader>
+
       <IonContent fullscreen className="ion-padding">
         <UserList users={queryResults} userClicked={getById} onDelete={deleteUser}/>
       </IonContent>
+      
+      <IonFooter>
+      <IonToolbar color="transparent" className="ion-no-border">
+        <div style={{textAlign:"center"}}>
+          <IonButton routerLink={"/create-user"}>AÑADIR USUARIO</IonButton>
+        </div>
+      </IonToolbar>
+    </IonFooter>
+    
     </IonPage>
   );
 };
