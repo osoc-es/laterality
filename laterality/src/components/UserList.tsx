@@ -15,11 +15,11 @@ export const UserList: React.FC<any> = ({ users, userClicked, onDelete }) => {
     <div>
       {users?.values?.map((user: any) => {
         return (
-             <IonCard className="ion-padding"  onClick={() => {
+             <IonCard className="ion-padding" onClick={() => {
               userClicked(user.id);
               }}
               key={user.id}>
-                <AvatarContainer username={user.name} />
+                <AvatarContainer username={user.name} userId={user.id} />
                 <IonButton
                 size="small"
                 color="danger"

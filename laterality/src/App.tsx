@@ -23,6 +23,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import { initdb } from './dataservice';
 import EditUser from './pages/EditUser';
+import MainMenu from './pages/MainMenu';
 
 const App: React.FC = () => {
   initdb().catch(() => window.alert("ERROR INITIALIZING"));
@@ -36,6 +37,9 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/edit-user/:id">
           <EditUser />
+        </Route>
+        <Route exact path="/main-menu/:id">
+          <MainMenu />
         </Route>
         <Route exact path="/create-user">
           <EditUser />
