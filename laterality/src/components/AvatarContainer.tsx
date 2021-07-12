@@ -7,7 +7,7 @@ interface ContainerProps {
     username:string,
 }
 
-const AvatarContainer: React.FC<ContainerProps> = (prop, onClick) => {
+const AvatarContainer: React.FC<ContainerProps> = (prop) => {
   return (
     <IonCardContent className="ion-padding">
         <IonAvatar className="ion-float-left">

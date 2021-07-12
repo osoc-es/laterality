@@ -12,18 +12,15 @@ import "./Home.css";
 
 import React, { useState } from "react";
 import { deleteUserById, getUserById, queryAllUsers, } from "../dataservice";
-import { CurrentUser } from "../components/CurrentUser";
 import { UserList } from "../components/UserList";
 import { useHistory } from "react-router";
 
 const Home: React.FC = () => {
   const [queryResults, setQueryResults] = useState<any>(null);
-  const [currentUser, setCurrentUser] = useState<any>(null);
   const history = useHistory();
 
   useIonViewWillEnter(() => {
     queryAllUsers().then(setQueryResults);
-    setCurrentUser(null);
   });
 
   /**
@@ -32,7 +29,6 @@ const Home: React.FC = () => {
    */
   const getById = async (userId: any) => {
     const c = await getUserById(userId);
-    setCurrentUser(c);
   };
 
   /**
@@ -42,9 +38,7 @@ const Home: React.FC = () => {
   const deleteUser = async (userId: any) => {
     await deleteUserById(userId);
     const data = await queryAllUsers();
-    setQueryResults(data);
-    setCurrentUser(null);
-    window.alert("Borrado con éxito");
+    setQueryResults(data); //update user list
   };
 
   return (
@@ -58,12 +52,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
-        <CurrentUser
-          user={currentUser}
-          onDelete={deleteUser}
-          onEdit={(id: any) => history.push(`/edit-user/${id}`)}
-        />
-        <UserList users={queryResults} userClicked={getById} />
+        <UserList users={queryResults} userClicked={getById} onDelete={deleteUser}/>
       </IonContent>
     </IonPage>
   );

@@ -24,6 +24,8 @@ const EditUser: React.FC<any> = () => {
   const [currentUser, setCurrentUser] = useState<any>(null);
 
   const [name, setName] = useState<any>(null);
+  const [points, setPoints] = useState<any>(null);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const EditUser: React.FC<any> = () => {
       getUserById(id).then((c: any) => {
         setCurrentUser(c.values[0]);
         setName(c.values[0]?.name);
+        setPoints(c.values[0]?.points);
       });
     }
   }, [id]);
@@ -40,9 +43,9 @@ const EditUser: React.FC<any> = () => {
    */
   const updateUser = async () => {
     if (id) {
-      await updateUserById(id, { name });
+      await updateUserById(id, { name, points });
     } else {
-        console.log("calling creteUser");
+        console.log("calling createUser");
       await createUser({ name });
     }
     history.goBack();
@@ -56,7 +59,7 @@ const EditUser: React.FC<any> = () => {
             <IonBackButton />
           </IonButtons>
           <IonTitle>
-            {id ? `EDIT:${id}` : "CREATE USER"}
+            {id ? "EDITAR" : "CREAR USUARIO"}
           </IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -70,7 +73,7 @@ const EditUser: React.FC<any> = () => {
           ></IonInput>
         </IonItem>
         <IonButton style={{ margin: 8 }} onClick={updateUser}>
-         { id ? "UPDATE USER" : "CREATE USER" }
+         { id ? "ACTUALIZAR USUARIO" : "CREAR USUARIO" }
         </IonButton>
       </IonContent>
     </IonPage>

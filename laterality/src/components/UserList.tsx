@@ -1,5 +1,6 @@
 import {
 
+  IonButton,
   IonCard,
 
 } from "@ionic/react";
@@ -8,7 +9,8 @@ import AvatarContainer from "./AvatarContainer";
 
 
 // Creates a list with the current users
-export const UserList: React.FC<any> = ({ users, userClicked }) => {
+export const UserList: React.FC<any> = ({ users, userClicked, onDelete }) => {
+
   return (
     <div>
       {users?.values?.map((user: any) => {
@@ -18,6 +20,15 @@ export const UserList: React.FC<any> = ({ users, userClicked }) => {
               }}
               key={user.id}>
                 <AvatarContainer username={user.name} />
+                <IonButton
+                size="small"
+                color="danger"
+                fill="outline"
+                style={{ margin: 8, float:"right"}}
+                onClick = {()=>{onDelete(user.id)}}
+                 >
+                BORRAR
+              </IonButton>
             </IonCard>
         );
       })}
