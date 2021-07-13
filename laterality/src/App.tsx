@@ -24,7 +24,8 @@ import './theme/variables.css';
 import { initdb } from './dataservice';
 import EditUser from './pages/EditUser';
 import MainMenu from './pages/MainMenu';
-
+import Map from './pages/Map';
+import MiniGame from './pages/MiniGame';
 const App: React.FC = () => {
   initdb().catch(() => window.alert("ERROR INITIALIZING"));
 
@@ -40,6 +41,12 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/main-menu/:id">
           <MainMenu />
+        </Route>
+        <Route exact path="/map/:id">
+          <Map />
+        </Route>
+        <Route exact path="/minigame/:id">
+          <MiniGame />
         </Route>
         <Route exact path="/create-user">
           <EditUser />

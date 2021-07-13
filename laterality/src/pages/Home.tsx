@@ -9,7 +9,7 @@ import {
   IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
-import "./Home.css";
+import "./Background.css";
 
 import React, { useState } from "react";
 import { deleteUserById, getUserById, queryAllUsers, } from "../dataservice";
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent fullscreen className="ion-padding">
+      <IonContent fullscreen className="ion-padding" id={"bg"}>
         <UserList users={queryResults} userClicked={getById} onDelete={deleteUser}/>
       </IonContent>
       
