@@ -34,7 +34,7 @@ export const initdb = async () => {
 
     return database;
   } catch (e) {
-    window.alert(JSON.stringify(e, null, 2));
+    //window.alert(JSON.stringify(e, null, 2));
     return null;
   }
 };
@@ -50,6 +50,15 @@ export const queryAllUsers = async () => {
   return database.query("SELECT * from user;");
 };
 
+
+export const queryAllwords = async () => {
+  // open database
+  await database.open();
+
+  // query to get all of the words from database
+  return database.query("SELECT * from word;");
+};
+
 /**
  *
  * @param userId
@@ -60,6 +69,21 @@ export const getUserById = async (userId: any) => {
   ]);
 };
 
+/**
+ *
+ * @param avatarId
+ */
+ export const getAvatarById = async (avatarId: any) => {
+  return await database.query("SELECT * FROM avatar WHERE id = ?;", [
+    avatarId + "",
+  ]);
+};
+
+export const getWordById = async (wordId: any) => {
+  return await database.query("SELECT * FROM word WHERE id = ?;", [
+    wordId + "",
+  ]);
+};
 /**
  *
  * @param userId
@@ -87,10 +111,10 @@ export const updateUserById = async (id: any, userData: any) => {
  * @param userData
  */
 export const createUser = async (userData: any) => {
-  const { name } = userData;
+  const { name, avatarId } = userData;
   return await database.run(
-    "INSERT INTO user (name, points) VALUES(?,0)",
-    [name]
+    "INSERT INTO user (name, points, avatarId) VALUES(?,0,?)",
+    [name, avatarId]
 
   );
 };

@@ -1,22 +1,41 @@
 import { IonAvatar, IonCardContent, IonItem } from "@ionic/react";
-import { useHistory } from "react-router";
+import { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
+import { getAvatarById, getUserById } from "../dataservice";
 
 interface ContainerProps {
-  username: string;
-  userId: string;
+  id: string;
 }
 
 const AvatarContainer: React.FC<ContainerProps> = (prop) => {
+  const [currentUser, setCurrentUser] = useState<any>(null);
+
+  const [name, setName] = useState<any>(null);
+  const [avatarImg, setAvatarImg] = useState<any>(null);
+
   const history = useHistory();
+
+  useEffect(() => {
+    if (prop.id) {
+      getUserById(prop.id).then((c: any) => {
+        setCurrentUser(c.values[0]);
+        setName(c.values[0]?.name);
+
+        getAvatarById(c.values[0]?.avatarId).then((av: any) => {
+          setAvatarImg(av.values[0].image);
+        });
+      });
+    }
+  }, [prop.id]);
 
   return (
     <IonCardContent className="ion-padding">
-      <IonItem onClick={(id: any) => history.push(`/main-menu/${prop.userId}`)}>
+      <IonItem onClick={(id: any) => history.push(`/main-menu/${prop.id}`)}>
         <IonAvatar className="ion-float-left">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" />
+          <img src={avatarImg} />
         </IonAvatar>
         <div className="ion-float-left ion-padding">
-          <h5 className="ion-margin-start">{prop.username}</h5>
+          <h1 className="ion-margin-start">{name}</h1>
         </div>
       </IonItem>
     </IonCardContent>

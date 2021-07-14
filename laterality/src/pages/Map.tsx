@@ -20,18 +20,23 @@ import {
 import { url } from "inspector";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getUserById } from "../dataservice";
+import { getAvatarById, getUserById } from "../dataservice";
 
 const Map: React.FC = () => {
+
   const { id } = useParams<any>();
   const [name, setName] = useState<any>(null);
   const [points, setPoints] = useState<any>(null);
+  const [avatar, setAvatar] = useState<any>(null);
 
   useEffect(() => {
     if (id) {
       getUserById(id).then((c: any) => {
         setName(c.values[0]?.name);
         setPoints(c.values[0]?.points);
+        getAvatarById(c.values[0]?.avatarId).then((av)=>{
+          setAvatar(av.values[0]?.image);
+        })
       });
     }
   }, [id]);
@@ -41,7 +46,7 @@ const Map: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonAvatar className="ion-float-left ion-padding">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" />
+            <img src={avatar}/>
           </IonAvatar>
           <div className="ion-float-left ion-padding-bottom">
             <h5>{name}</h5>

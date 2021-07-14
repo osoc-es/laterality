@@ -19,7 +19,7 @@ export const UserList: React.FC<any> = ({ users, userClicked, onDelete }) => {
               userClicked(user.id);
               }}
               key={user.id}>
-                <AvatarContainer username={user.name} userId={user.id} />
+                <AvatarContainer id={user.id}/>
                 <IonButton
                 size="small"
                 color="danger"

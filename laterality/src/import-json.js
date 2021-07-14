@@ -4,7 +4,7 @@ const dataToImport = {
   database: "latusdb",
   version: 1,
   encrypted: false,
-  mode: "full",
+  mode: "partial",
   tables: [
 
     {
@@ -14,6 +14,14 @@ const dataToImport = {
         { column: "name", value: "TEXT UNIQUE NOT NULL" },
         { column: "image", value: "TEXT" },
       ],
+      values: [
+        [1,"snorlax-cat","/assets/images/characters/snorlax_cat.png"],
+        [2,"cat","/assets/images/characters/cat.png"],
+        [3,"dog","/assets/images/characters/dog.png"],
+        [4,"golden-dog","/assets/images/characters/golden_dog.png"],
+        [5,"rabbit","/assets/images/characters/rabbit.png"],
+        [6,"brown-rabbit","/assets/images/characters/brown_rabbit.png"],
+      ]
     }, 
     {
       name: "user",
@@ -21,7 +29,7 @@ const dataToImport = {
         { column: "id", value: "INTEGER PRIMARY KEY NOT NULL" },
         { column: "name", value: "TEXT UNIQUE NOT NULL" },
         { column: "points", value: "INTEGER" },
-        { column:"avatarId", value: "INTEGER"},
+        { column:"avatarId", value: "INTEGER NOT NULL"},
         { constraint: "avatar_fk", value: "FOREIGN KEY (avatarId) REFERENCES avatar(id) ON DELETE RESTRICT" },
       ],
     },

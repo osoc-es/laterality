@@ -11,19 +11,24 @@ import "./Background.css";
 
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { getUserById } from "../dataservice";
+import { getAvatarById, getUserById } from "../dataservice";
 
 const MainMenu: React.FC = () => {
   const { id } = useParams<any>();
+  
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [name, setName] = useState<any>(null);
+  const [avatar, setAvatar] = useState<any>(null);
+  
   const history = useHistory();
 
   useEffect(() => {
     if (id) {
-      getUserById(id).then((c: any) => {
-        setCurrentUser(c.values[0]);
-        setName(c.values[0]?.name);
+      getUserById(id).then((user: any) => {
+        setName(user.values[0]?.name);
+        getAvatarById(user.values[0]?.avatarId).then((av) => {
+          setAvatar(av.values[0]?.image);
+        })
       });
     }
   }, [id]);
@@ -45,7 +50,7 @@ const MainMenu: React.FC = () => {
             <IonCol>
               <div style={{ textAlign: "center" }}>
                 <h2>¿Empezamos la aventura {name}?</h2>
-                <IonImg src="assets/images/snorlax-cat.png" />
+                <IonImg src={avatar} />
                 <IonButton  onClick={() => history.push(`/map/${id}`)}>Jugar</IonButton>
               </div>
             </IonCol>
