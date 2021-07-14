@@ -23,7 +23,7 @@ const loadJSON = async () => {
 export const initdb = async () => {
   try {
     database = await mSQLite.createConnection(
-      "testdb",
+      "latusdb",
       false,
       "no-encryption",
       1
