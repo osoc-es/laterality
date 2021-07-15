@@ -85,6 +85,16 @@ export const getWordById = async (wordId: any) => {
     wordId + "",
   ]);
 };
+
+/**
+ *
+ * @param wordGroup
+ */
+export const getWordsByGroup = async(wordGroup:any) => {
+  return await database.query("SELECT * FROM word WHERE wordGroup = ?;",[
+    wordGroup + "",
+  ])
+}
 /**
  *
  * @param userId

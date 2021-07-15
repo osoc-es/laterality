@@ -8,7 +8,6 @@ interface ContainerProps {
 }
 
 const AvatarContainer: React.FC<ContainerProps> = (prop) => {
-  const [currentUser, setCurrentUser] = useState<any>(null);
 
   const [name, setName] = useState<any>(null);
   const [avatarImg, setAvatarImg] = useState<any>(null);
@@ -18,7 +17,6 @@ const AvatarContainer: React.FC<ContainerProps> = (prop) => {
   useEffect(() => {
     if (prop.id) {
       getUserById(prop.id).then((c: any) => {
-        setCurrentUser(c.values[0]);
         setName(c.values[0]?.name);
 
         getAvatarById(c.values[0]?.avatarId).then((av: any) => {

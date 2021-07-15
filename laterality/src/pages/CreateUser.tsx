@@ -27,6 +27,7 @@ const CreateUser: React.FC<any> = () => {
 
   const createUserAux = async () => {
     await createUser({ name, avatarId });
+    history.goBack();
   };
 
   return (

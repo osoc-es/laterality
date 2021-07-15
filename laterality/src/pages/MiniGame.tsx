@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   IonButton,
   IonCol,
@@ -13,15 +13,12 @@ import {
 import "./MiniGame.css";
 import { TextToSpeech } from "@capacitor-community/text-to-speech";
 
-import WrongLetters from "../components/WrongLetters";
-import Word from "../components/Word";
-import Popup from "../components/Popup";
-import Notification from "../components/Notification";
-import { showNotification as show, checkWin } from "../helpers/helpers";
-import { queryAllwords } from "../dataservice";
+import { getWordsByGroup } from "../dataservice";
+import { useParams } from "react-router";
 
 const MiniGame: React.FC = () => {
-  //Variables
+  const { id } = useParams<any>();
+
   let words = new Array();
   let images = new Array();
   let index=-1;
@@ -33,7 +30,7 @@ const MiniGame: React.FC = () => {
   };
 
   const loadWords = async () => {
-    await queryAllwords().then((results) => {
+    await getWordsByGroup("br").then((results) => {
       results?.values?.map((w: any) => {
         words.push(w.name);
         images.push(w.image);
@@ -77,6 +74,7 @@ const MiniGame: React.FC = () => {
                 )}
               </IonCol>
             </IonRow>
+        
             <IonRow>
               <IonCol size="3"></IonCol>
               <IonCol size="6">
@@ -84,11 +82,21 @@ const MiniGame: React.FC = () => {
               </IonCol>
               <IonCol size="3"></IonCol>
             </IonRow>
+
             <IonRow>
               <IonCol>
                 <IonInput value={text} placeholder="Palabra" onIonChange={e => setText(e.detail.value!)} clearInput></IonInput>
+                <IonButton color="success" onClick={()=>{
+                  if(text.toLowerCase() === selectedWord){
+                    index = chooseRandomWordIndex();
+                    setSelectedWord(words[index]);
+                    setSelectedImage(images[index]);
+                    setText("");
+                  }
+                }}>COMPROBAR</IonButton>
               </IonCol>
             </IonRow>
+            
             <IonRow>
               <IonCol>
                 <IonButton
@@ -98,10 +106,11 @@ const MiniGame: React.FC = () => {
                     setSelectedImage(images[index]);
                   }}
                 >
-                  {index!=-1 ? "COMENZAR":"SIGUIENTE PALABRA"}
+                  {index!=-1 ? "SIGUIENTE PALABREA":"COMENZAR"}
                 </IonButton>
               </IonCol>
             </IonRow>
+        
         </IonGrid>
       </IonContent>
     </IonPage>

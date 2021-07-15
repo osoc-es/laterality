@@ -26,6 +26,7 @@ import MainMenu from './pages/MainMenu';
 import Map from './pages/Map';
 import MiniGame from './pages/MiniGame';
 import CreateUser from './pages/CreateUser';
+import Levels from './pages/Levels';
 const App: React.FC = () => {
   initdb().catch(() => window.alert("ERROR INITIALIZING"));
 
@@ -38,6 +39,9 @@ const App: React.FC = () => {
         </Route>
         <Route exact path="/main-menu/:id">
           <MainMenu />
+        </Route>
+        <Route exact path="/levels/:id">
+          <Levels />
         </Route>
         <Route exact path="/map/:id">
           <Map />

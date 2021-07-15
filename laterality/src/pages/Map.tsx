@@ -52,10 +52,10 @@ const Map: React.FC = () => {
           <div className="ion-float-left ion-padding-bottom">
             <h5>{name}</h5>
           </div>
-          <div className="ion-float-right ion-padding">
-            <div style={{display:"flex"}}>
-              <img src="/assets/images/coin.png" style={{ width:"128px", height:"auto"}}/>
-            </div>
+          <IonAvatar className="ion-float-left ion-padding">
+          <img src="/assets/images/coin.png"/>
+          </IonAvatar>
+          <div className="ion-float-right ion-padding-bottom">
             <h5>{points}</h5>
           </div>
         </IonToolbar>
@@ -72,9 +72,10 @@ const Map: React.FC = () => {
               right: "0px",
             }}
           />
+          <div >
           <IonImg
             src="/assets/images/roller-coaster.png"
-            onClick={() => history.push(`/minigame/${id}`)}
+            onClick={() => history.push(`/levels/${id}`)}
             style={{
               width: "40%",
               height: "auto",
@@ -82,7 +83,8 @@ const Map: React.FC = () => {
               top: "45%",
               right: "0px",
             }}
-          />
+           />
+           </div>
         </div>
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton

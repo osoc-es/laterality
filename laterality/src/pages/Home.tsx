@@ -1,11 +1,8 @@
 import {
   IonButton,
-  IonButtons,
   IonContent,
   IonFooter,
-  IonHeader,
   IonPage,
-  IonTitle,
   IonToolbar,
   useIonViewWillEnter,
 } from "@ionic/react";
