@@ -46,7 +46,7 @@ const App: React.FC = () => {
         <Route exact path="/map/:id">
           <Map />
         </Route>
-        <Route exact path="/minigame/:id">
+        <Route exact path="/minigame/:id/:wordGroup">
           <MiniGame />
         </Route>
         <Route exact path="/create-user">

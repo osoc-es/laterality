@@ -17,7 +17,7 @@ import { getWordsByGroup } from "../dataservice";
 import { useParams } from "react-router";
 
 const MiniGame: React.FC = () => {
-  const { id } = useParams<any>();
+  const { id, wordGroup} = useParams<any>();
 
   let words = new Array();
   let images = new Array();
@@ -30,7 +30,7 @@ const MiniGame: React.FC = () => {
   };
 
   const loadWords = async () => {
-    await getWordsByGroup("br").then((results) => {
+    await getWordsByGroup(wordGroup).then((results) => {
       results?.values?.map((w: any) => {
         words.push(w.name);
         images.push(w.image);
@@ -56,9 +56,6 @@ const MiniGame: React.FC = () => {
   const [start, setStart] = useState<boolean>(false);
 
   const selectNewWord = () => {
-    //Remove word
-    words.slice(words.indexOf(selectedWord),1);
-    images.slice(words.indexOf(selectedWord),1);
 
     //Get new random word
     index = chooseRandomWordIndex();
@@ -68,6 +65,7 @@ const MiniGame: React.FC = () => {
     //Set input text to ""
     setText("");
   };
+
   useEffect(() => {
     loadWords();
   }, [words]);
@@ -116,8 +114,7 @@ const MiniGame: React.FC = () => {
               </IonRow>
 
               <IonRow>
-                <IonCol size="3"></IonCol>
-                <IonCol size="6">
+                <IonCol>
                   <IonLabel>
                     <IonInput
                       value={text}
@@ -129,7 +126,7 @@ const MiniGame: React.FC = () => {
                   <IonButton
                     color="success"
                     onClick={() => {
-                      if (text.toLowerCase() === selectedWord) {
+                      if (text.trim().toLowerCase() === selectedWord) {
                         selectNewWord();
                       }
                     }}
@@ -137,7 +134,6 @@ const MiniGame: React.FC = () => {
                     COMPROBAR
                   </IonButton>
                 </IonCol>
-                <IonCol size="3"></IonCol>
               </IonRow>
             </IonRow>
           )}
