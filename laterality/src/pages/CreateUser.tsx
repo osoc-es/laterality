@@ -13,28 +13,20 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { createUser, getUserById, updateUserById } from "../dataservice";
+import { createUser } from "../dataservice";
 
-const EditUser: React.FC<any> = () => {
+const CreateUser: React.FC<any> = () => {
   const { id } = useParams<any>();
-  const [currentUser, setCurrentUser] = useState<any>(null);
 
   const [name, setName] = useState<any>(null);
-  const [points, setPoints] = useState<any>(null);
   const [avatarId, setAvatarId] = useState<any>(null);
 
   const history = useHistory();
 
-  const updateUser = async () => {
-    if (id) {
-      await updateUserById(id, { name, points });
-    } else {
-      console.log("calling createUser");
-      await createUser({ name, avatarId });
-    }
-    history.goBack();
+  const createUserAux = async () => {
+    await createUser({ name, avatarId });
   };
 
   return (
@@ -44,7 +36,7 @@ const EditUser: React.FC<any> = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>{id ? "EDITAR" : "CREAR USUARIO"}</IonTitle>
+          <IonTitle>CREAR USUARIO</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="ion-padding">
@@ -71,12 +63,11 @@ const EditUser: React.FC<any> = () => {
             <IonSelectOption value="6">Conejo (Alt.)</IonSelectOption>
           </IonSelect>
         </IonItem>
-        <IonButton style={{ margin: 8 }} onClick={updateUser}>
-          {id ? "ACTUALIZAR USUARIO" : "CREAR USUARIO"}
+        <IonButton style={{ margin: 8 }} onClick={createUserAux}>CREAR USUARIO
         </IonButton>
       </IonContent>
     </IonPage>
   );
 };
 
-export default EditUser;
+export default CreateUser;

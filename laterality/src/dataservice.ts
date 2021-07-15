@@ -52,9 +52,6 @@ export const queryAllUsers = async () => {
 
 
 export const queryAllwords = async () => {
-  // open database
-  await database.open();
-
   // query to get all of the words from database
   return database.query("SELECT * from word;");
 };
@@ -79,6 +76,10 @@ export const getUserById = async (userId: any) => {
   ]);
 };
 
+/**
+ *
+ * @param wordId
+ */
 export const getWordById = async (wordId: any) => {
   return await database.query("SELECT * FROM word WHERE id = ?;", [
     wordId + "",
@@ -99,10 +100,11 @@ export const deleteUserById = async (userId: any) => {
  * @param id
  */
 export const updateUserById = async (id: any, userData: any) => {
-  const { name, points } = userData;
+  const { name, points, avatarId } = userData;
+  alert(JSON.stringify(userData));
   return await database.query(
-    "UPDATE user SET name=?, points=? WHERE id = ?;",
-    [name, points, id + ""]
+    "UPDATE user SET name=?, points=?, avatarId=? WHERE id = ?;",
+    [name, points, avatarId, id + ""]
   );
 };
 

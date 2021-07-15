@@ -15,11 +15,7 @@ const Popup = ({
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
     finalMessage = "Felicidades! Has ganado! 😃 La palabra era " + selectedWord;
     playable = false;
-  } /*else if (checkWin(correctLetters, wrongLetters, selectedWord) === "lose") {
-    finalMessage = "Unfortunately you lost. 😕";
-    finalMessageRevealWord = `...the word was: ${selectedWord}`;
-    playable = false;
-  }*/
+  } 
 
   useEffect(() => {
     setPlayable(playable);

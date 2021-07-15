@@ -9,7 +9,7 @@ import AvatarContainer from "./AvatarContainer";
 
 
 // Creates a list with the current users
-export const UserList: React.FC<any> = ({ users, userClicked, onDelete }) => {
+export const UserList: React.FC<any> = ({ users, userClicked, onEdit, onDelete }) => {
 
   return (
     <div>

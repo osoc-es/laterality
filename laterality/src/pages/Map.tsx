@@ -19,12 +19,13 @@ import {
 } from "@ionic/react";
 import { url } from "inspector";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { getAvatarById, getUserById } from "../dataservice";
 
 const Map: React.FC = () => {
 
   const { id } = useParams<any>();
+  const history = useHistory();
   const [name, setName] = useState<any>(null);
   const [points, setPoints] = useState<any>(null);
   const [avatar, setAvatar] = useState<any>(null);
@@ -52,6 +53,9 @@ const Map: React.FC = () => {
             <h5>{name}</h5>
           </div>
           <div className="ion-float-right ion-padding">
+            <div style={{display:"flex"}}>
+              <img src="/assets/images/coin.png" style={{ width:"128px", height:"auto"}}/>
+            </div>
             <h5>{points}</h5>
           </div>
         </IonToolbar>
@@ -70,9 +74,7 @@ const Map: React.FC = () => {
           />
           <IonImg
             src="/assets/images/roller-coaster.png"
-            onClick={() => {
-              alert("Minigame");
-            }}
+            onClick={() => history.push(`/minigame/${id}`)}
             style={{
               width: "40%",
               height: "auto",

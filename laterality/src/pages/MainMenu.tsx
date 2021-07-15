@@ -38,8 +38,10 @@ const MainMenu: React.FC = () => {
       <IonContent fullscreen className="ion-padding" id="background">
         <IonGrid>
           <IonRow>
-            <IonCol size="4">
-              <IonImg src="assets/images/about.png" />
+            <IonCol size="4" >
+              <a href="https://osoc-es.github.io/laterality/">
+                <IonImg src="assets/images/about.png" />
+              </a>
             </IonCol>
             <IonCol></IonCol>
             <IonCol size="4">

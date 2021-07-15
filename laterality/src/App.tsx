@@ -22,10 +22,10 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import { initdb } from './dataservice';
-import EditUser from './pages/EditUser';
 import MainMenu from './pages/MainMenu';
 import Map from './pages/Map';
 import MiniGame from './pages/MiniGame';
+import CreateUser from './pages/CreateUser';
 const App: React.FC = () => {
   initdb().catch(() => window.alert("ERROR INITIALIZING"));
 
@@ -35,9 +35,6 @@ const App: React.FC = () => {
       <IonRouterOutlet>
         <Route exact path="/home">
           <Home />
-        </Route>
-        <Route exact path="/edit-user/:id">
-          <EditUser />
         </Route>
         <Route exact path="/main-menu/:id">
           <MainMenu />
@@ -49,7 +46,7 @@ const App: React.FC = () => {
           <MiniGame />
         </Route>
         <Route exact path="/create-user">
-          <EditUser />
+          <CreateUser />
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
