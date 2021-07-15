@@ -1,6 +1,10 @@
 {
 	"appId": "io.ionic.starter",
+<<<<<<< HEAD
 	"appName": "latus",
+=======
+	"appName": "Latus",
+>>>>>>> f5b23c73607ba2c4ace2d7eac15c9496f6297764
 	"webDir": "build",
 	"bundledWebRuntime": false
 }
