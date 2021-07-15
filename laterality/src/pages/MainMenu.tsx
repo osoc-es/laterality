@@ -63,7 +63,7 @@ const MainMenu: React.FC = () => {
             <IonCol size="4">
               <IonImg src="assets/images/help.png" onClick={() => setShowModal(true)}/>
               <IonModal isOpen={showModal} cssClass="ion-padding">
-                <div className="ion-margin" style={{backgroundColor:"#93D2DB", color:"#026A94", width:"100%", height:"100%"}}>
+                <div className="ion-margin" style={{backgroundColor:"#93D2DB", color:"#026A94", height:"100%"}}>
                   <h4>Latus es un juego interactivo que te permitirá ser más rápido que un gato.</h4>
                   <h3>¿Conseguirás completar los retos del parque de atracciones?</h3>
                   <h4>La Montaña Rusa</h4>

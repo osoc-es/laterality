@@ -52,10 +52,10 @@ const Map: React.FC = () => {
           <div className="ion-float-left ion-padding-bottom">
             <h5>{name}</h5>
           </div>
-          <IonAvatar className="ion-float-left ion-padding">
+          <IonAvatar className="ion-float-right ion-padding">
           <img src="/assets/images/coin.png"/>
           </IonAvatar>
-          <div className="ion-float-right ion-padding-bottom">
+          <div className="ion-float-right ion-padding-bottom ion-margin-right">
             <h5>{points}</h5>
           </div>
         </IonToolbar>

@@ -8,9 +8,9 @@ import {
   IonPage,
   IonRow,
   IonFabButton,
+  IonLabel,
 } from "@ionic/react";
 
-import "./MiniGame.css";
 import { TextToSpeech } from "@capacitor-community/text-to-speech";
 
 import { getWordsByGroup } from "../dataservice";
@@ -21,7 +21,7 @@ const MiniGame: React.FC = () => {
 
   let words = new Array();
   let images = new Array();
-  let index=-1;
+  let index = -1;
   let timestamp;
   const tiempos = [];
 
@@ -53,6 +53,21 @@ const MiniGame: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<any>();
   const [text, setText] = useState<string>("");
 
+  const [start, setStart] = useState<boolean>(false);
+
+  const selectNewWord = () => {
+    //Remove word
+    words.slice(words.indexOf(selectedWord),1);
+    images.slice(words.indexOf(selectedWord),1);
+
+    //Get new random word
+    index = chooseRandomWordIndex();
+    setSelectedWord(words[index]);
+    setSelectedImage(images[index]);
+
+    //Set input text to ""
+    setText("");
+  };
   useEffect(() => {
     loadWords();
   }, [words]);
@@ -61,56 +76,73 @@ const MiniGame: React.FC = () => {
     <IonPage>
       <IonContent>
         <IonGrid>
-            <IonRow>
-              <IonCol>
-                {selectedWord && (
-                  <IonFabButton>
-                    <img
-                      src="assets/images/sound.png"
-                      onClick={() => speak(selectedWord)}
-                      style={{ width: 50, height: 50 }}
-                    />
-                  </IonFabButton>
-                )}
-              </IonCol>
-            </IonRow>
-        
-            <IonRow>
-              <IonCol size="3"></IonCol>
-              <IonCol size="6">
-                {selectedImage && <img src={selectedImage} />}
-              </IonCol>
-              <IonCol size="3"></IonCol>
-            </IonRow>
+        <div style={{textAlign:"center"}}>
 
-            <IonRow>
-              <IonCol>
-                <IonInput value={text} placeholder="Palabra" onIonChange={e => setText(e.detail.value!)} clearInput></IonInput>
-                <IonButton color="success" onClick={()=>{
-                  if(text.toLowerCase() === selectedWord){
-                    index = chooseRandomWordIndex();
-                    setSelectedWord(words[index]);
-                    setSelectedImage(images[index]);
-                    setText("");
-                  }
-                }}>COMPROBAR</IonButton>
-              </IonCol>
-            </IonRow>
-            
+          {!start && (
             <IonRow>
               <IonCol>
                 <IonButton
                   onClick={() => {
-                    index = chooseRandomWordIndex();
-                    setSelectedWord(words[index]);
-                    setSelectedImage(images[index]);
+                    setStart(true);
+                    selectNewWord();
                   }}
                 >
-                  {index!=-1 ? "SIGUIENTE PALABREA":"COMENZAR"}
+                  COMENZAR
                 </IonButton>
               </IonCol>
             </IonRow>
-        
+          )}
+          {start && (
+            <IonRow>
+              <IonRow>
+                <IonCol>
+                  {selectedWord && (
+                    <IonFabButton>
+                      <img
+                        src="assets/images/sound.png"
+                        onClick={() => speak(selectedWord)}
+                        style={{ width: 50, height: 50 }}
+                      />
+                    </IonFabButton>
+                  )}
+                </IonCol>
+              </IonRow>
+              <IonRow>
+                <IonCol size="3"></IonCol>
+                <IonCol size="6">
+                  {selectedImage && <img src={selectedImage} />}
+                </IonCol>
+                <IonCol size="3"></IonCol>
+              </IonRow>
+
+              <IonRow>
+                <IonCol size="3"></IonCol>
+                <IonCol size="6">
+                  <IonLabel>
+                    <IonInput
+                      value={text}
+                      style={{backgroundColor:"white"}}
+                      onIonChange={(e) => setText(e.detail.value!)}
+                      clearInput
+                    ></IonInput>
+                  </IonLabel>
+                  <IonButton
+                    color="success"
+                    onClick={() => {
+                      if (text.toLowerCase() === selectedWord) {
+                        selectNewWord();
+                      }
+                    }}
+                  >
+                    COMPROBAR
+                  </IonButton>
+                </IonCol>
+                <IonCol size="3"></IonCol>
+              </IonRow>
+            </IonRow>
+          )}
+          </div>
+
         </IonGrid>
       </IonContent>
     </IonPage>
