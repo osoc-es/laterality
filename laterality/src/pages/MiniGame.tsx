@@ -9,6 +9,7 @@ import {
   IonRow,
   IonFabButton,
   IonLabel,
+  IonToast,
 } from "@ionic/react";
 
 import { TextToSpeech } from "@capacitor-community/text-to-speech";
@@ -54,6 +55,8 @@ const MiniGame: React.FC = () => {
   const [text, setText] = useState<string>("");
 
   const [start, setStart] = useState<boolean>(false);
+  const [correctToast, setCorrectToast] = useState(false);
+  const [incorrectToast, setIncorrectToast] = useState(false);
 
   const selectNewWord = () => {
 
@@ -127,7 +130,10 @@ const MiniGame: React.FC = () => {
                     color="success"
                     onClick={() => {
                       if (text.trim().toLowerCase() === selectedWord) {
+                        setCorrectToast(true);
                         selectNewWord();
+                      } else {
+                        setIncorrectToast(true);
                       }
                     }}
                   >
@@ -135,7 +141,22 @@ const MiniGame: React.FC = () => {
                   </IonButton>
                 </IonCol>
               </IonRow>
+              <IonToast
+                isOpen={correctToast}
+                onDidDismiss={() => setCorrectToast(false)}
+                message="¡Has acertado!"
+                duration={400}
+                color="success"
+              />
+               <IonToast
+                isOpen={incorrectToast}
+                onDidDismiss={() => setIncorrectToast(false)}
+                message="Ohh... has fallado"
+                duration={400}
+                color="danger"
+              />
             </IonRow>
+            
           )}
           </div>
 
