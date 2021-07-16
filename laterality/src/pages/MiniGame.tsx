@@ -15,14 +15,15 @@ import {
 import { TextToSpeech } from "@capacitor-community/text-to-speech";
 
 import { getWordsByGroup } from "../dataservice";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const MiniGame: React.FC = () => {
   const { id, wordGroup} = useParams<any>();
+  const history = useHistory();
 
   let words = new Array();
   let images = new Array();
-  let index = -1;
+  
   let timestamp;
   const tiempos = [];
 
@@ -53,7 +54,9 @@ const MiniGame: React.FC = () => {
   const [selectedWord, setSelectedWord] = useState<any>();
   const [selectedImage, setSelectedImage] = useState<any>();
   const [text, setText] = useState<string>("");
+  const [idx, setIdx] = useState<number>(0);
 
+  
   const [start, setStart] = useState<boolean>(false);
   const [correctToast, setCorrectToast] = useState(false);
   const [incorrectToast, setIncorrectToast] = useState(false);
@@ -61,9 +64,15 @@ const MiniGame: React.FC = () => {
   const selectNewWord = () => {
 
     //Get new random word
-    index = chooseRandomWordIndex();
-    setSelectedWord(words[index]);
-    setSelectedImage(images[index]);
+    setIdx(idx+1);
+    if(idx < words.length) {
+      setSelectedWord(words[idx]);
+      setSelectedImage(images[idx]);
+    } else {
+      alert("Has completado el reto!");
+      history.push(`/home`);
+    }
+
 
     //Set input text to ""
     setText("");
@@ -118,14 +127,12 @@ const MiniGame: React.FC = () => {
 
               <IonRow>
                 <IonCol>
-                  <IonLabel>
-                    <IonInput
+                  <IonInput
                       value={text}
                       style={{backgroundColor:"white"}}
                       onIonChange={(e) => setText(e.detail.value!)}
                       clearInput
-                    ></IonInput>
-                  </IonLabel>
+                  ></IonInput>
                   <IonButton
                     color="success"
                     onClick={() => {
